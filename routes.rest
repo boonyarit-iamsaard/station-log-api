@@ -1,0 +1,68 @@
+GET http://localhost:5000/api/spares
+
+###
+
+GET http://localhost:5000/api/spares/60927fdd91ef8c2cc823825c
+
+###
+
+POST http://localhost:5000/api/spares
+Content-Type: application/json
+
+{
+  "date": "2021-05-05",
+  "airline": "CX",
+  "fltno": "653/654",
+  "prefix": "B-",
+  "tail": "LQA",
+  "acreg": "B-LQA",
+  "type": "Consumable",
+  "part": "AGC22",
+  "desc": "WET&DRY",
+  "serial": "NIL",
+  "grn": "0001234567",
+  "qty": 1,
+  "store": "BKK",
+  "usedBy": "Boonyarit",
+  "status": "Pending",
+  "issued": { 
+    "status": false, 
+    "number": "", 
+    "by": "" 
+  },
+  "returned": { 
+    "status": false, 
+    "number": "", 
+    "by": "" 
+  },
+  "transferred": {
+     "status": false, 
+     "number": "", 
+     "by": ""
+  }
+}
+
+###
+
+GET http://localhost:5000/api/user/user
+
+###
+
+POST http://localhost:5000/api/auth/signup
+Content-Type: application/json
+
+{
+ "username": "bkkengadmin",
+ "password": "asd12345",
+ "roles": ["user", "admin"] 
+}
+
+###
+
+POST http://localhost:5000/api/auth/signin
+Content-Type: application/json
+
+{
+  "username": "bkkengadmin",
+  "password": "asd12345"
+}
