@@ -41,7 +41,10 @@ exports.update = async (req, res) => {
     const updatedHandlingRecord = await HandlingRecord.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { useFindAndModify: false }
+      {
+        new: true,
+        useFindAndModify: false,
+      }
     );
 
     res.json({

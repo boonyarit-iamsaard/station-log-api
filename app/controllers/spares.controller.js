@@ -41,7 +41,10 @@ exports.update = async (req, res) => {
     const updatedSpare = await Spare.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { useFindAndModify: false }
+      {
+        new: true,
+        useFindAndModify: false,
+      }
     );
 
     res.json({
