@@ -1,3 +1,4 @@
+// const Spare = require('../models/spare.model');
 const db = require('../models');
 const Spare = db.spare;
 

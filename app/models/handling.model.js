@@ -1,5 +1,7 @@
-module.exports = mongoose => {
-  const taskSchema = mongoose.Schema({
+const mongoose = require('mongoose');
+
+const taskSchema = new mongoose.Schema(
+  {
     taskNo: {
       type: String,
     },
@@ -16,61 +18,61 @@ module.exports = mongoose => {
         default: 0,
       },
     },
-  });
+  },
+  {
+    timestamps: true,
+  }
+);
 
-  const HandlingRecord = mongoose.model(
-    'handlingRecord',
-    mongoose.Schema(
-      {
-        date: {
-          type: String,
-          required: true,
-        },
-        airline: {
-          type: String,
-          required: true,
-        },
-        otherAirline: {
-          type: String,
-        },
-        fltno: {
-          type: String,
-          required: true,
-        },
-        prefix: {
-          type: String,
-          required: true,
-        },
-        tail: {
-          type: String,
-          required: true,
-        },
-        acreg: {
-          type: String,
-          required: true,
-        },
-        aircraftType: {
-          type: String,
-          required: true,
-        },
-        check: {
-          type: String,
-          required: true,
-        },
-        otherCheck: {
-          type: String,
-        },
-        tasks: [taskSchema],
-        eic: {
-          type: String,
-          required: true,
-        },
-      },
-      {
-        timestamps: true,
-      }
-    )
-  );
+const handlingSchema = new mongoose.Schema(
+  {
+    date: {
+      type: String,
+      required: true,
+    },
+    airline: {
+      type: String,
+      required: true,
+    },
+    otherAirline: {
+      type: String,
+    },
+    fltno: {
+      type: String,
+      required: true,
+    },
+    prefix: {
+      type: String,
+      required: true,
+    },
+    tail: {
+      type: String,
+      required: true,
+    },
+    acreg: {
+      type: String,
+      required: true,
+    },
+    aircraftType: {
+      type: String,
+      required: true,
+    },
+    check: {
+      type: String,
+      required: true,
+    },
+    otherCheck: {
+      type: String,
+    },
+    tasks: [taskSchema],
+    eic: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-  return HandlingRecord;
-};
+module.exports = mongoose.model('HandlingRecord', handlingSchema);

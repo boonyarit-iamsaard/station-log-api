@@ -8,11 +8,12 @@ const db = {};
 
 db.mongoose = mongoose;
 db.url = dbConfig.url;
+
 db.user = require('./user.model');
 db.role = require('./role.model');
-db.spare = require('./spare.model')(mongoose);
+db.spare = require('./spare.model');
 db.handlingRecord = require('./handling.model')(mongoose);
 
-db.ROLES = ['user', 'admin'];
+db.ROLES = ['common', 'admin', 'store', 'engineer'];
 
 module.exports = db;

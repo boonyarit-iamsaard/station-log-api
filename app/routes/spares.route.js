@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require('../models');
 const Spare = db.spare;
 
-const sparesControllers = require('../controllers/spares.controller');
+const sparesControllers = require('../controllers/spare.controller');
 
 // GET /api/spares
 router.get('/', sparesControllers.findAll);

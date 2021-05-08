@@ -40,6 +40,7 @@ db.mongoose
     useCreateIndex: true,
   })
   .then(() => console.log('Database is connected.'))
+  .then(() => initial())
   .catch(err => {
     console.log('Unable to connect the database', err);
     process.exit();
@@ -50,13 +51,13 @@ const initial = () => {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
-        name: 'user',
+        name: 'common',
       }).save(err => {
         if (err) {
           console.log('error', err.message);
         }
 
-        console.log("added 'user' to roles collection");
+        console.log("added 'common' to roles collection");
       });
 
       new Role({
@@ -68,11 +69,29 @@ const initial = () => {
 
         console.log("added 'admin' to roles collection");
       });
+
+      new Role({
+        name: 'store',
+      }).save(err => {
+        if (err) {
+          console.log('error', err.message);
+        }
+
+        console.log("added 'store' to roles collection");
+      });
+
+      new Role({
+        name: 'engineer',
+      }).save(err => {
+        if (err) {
+          console.log('error', err.message);
+        }
+
+        console.log("added 'engineer' to roles collection");
+      });
     }
   });
 };
-
-initial();
 
 const handlingRoutes = require('./app/routes/handling.route');
 const sparesRoutes = require('./app/routes/spares.route');
