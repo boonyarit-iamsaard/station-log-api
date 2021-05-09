@@ -105,10 +105,7 @@ const login = async (req, res, next) => {
   }
 
   if (!existingUser) {
-    const error = new HttpError(
-      'Invalid credentials, could not log you in.',
-      403
-    );
+    const error = new HttpError('User not found, plese signup.', 403);
     return next(error);
   }
 
@@ -149,7 +146,7 @@ const login = async (req, res, next) => {
   let token;
   try {
     token = jwt.sign(
-      { userID: existingUser._id, email: existingUser.username },
+      { userID: existingUser._id, username: existingUser.username },
       process.env.SECRET_KEY,
       { expiresIn: '1h' }
     );
@@ -162,11 +159,12 @@ const login = async (req, res, next) => {
   }
 
   res.json({
+    token: token,
     user: {
       userID: existingUser._id,
-      name: existingUser.name,
+      firstname: existingUser.firstname,
+      lastname: existingUser.lastname,
       roles: assignedRoles,
-      token: token,
     },
   });
 };
