@@ -21,7 +21,7 @@ const getUsers = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
-  const { name, username, password, roles } = req.body;
+  const { firstname, lastname, username, password, roles } = req.body;
 
   let existingUser;
   try {
@@ -69,7 +69,8 @@ const signup = async (req, res, next) => {
   }
 
   const createdUser = new User({
-    name,
+    firstname,
+    lastname,
     username,
     password: hashedPassword,
     roles: assignedRoles,
@@ -121,10 +122,7 @@ const login = async (req, res, next) => {
   }
 
   if (!isValidPassword) {
-    const error = new HttpError(
-      'Invalid credentials, could not log you in.',
-      403
-    );
+    const error = new HttpError('Invalid username or password.', 403);
     return next(error);
   }
 

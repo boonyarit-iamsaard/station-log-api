@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const checkAuth = require('../middlewares/check-auth');
+
 const handlingRecordsControllers = require('../controllers/handling-controller');
+
+router.use(checkAuth);
 
 router.get('/', handlingRecordsControllers.getHandlingRecords);
 
