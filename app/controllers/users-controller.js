@@ -36,7 +36,7 @@ const signup = async (req, res, next) => {
 
   if (existingUser) {
     const error = new HttpError(
-      'User exists already, please login instead.',
+      'User already exists, please login instead.',
       422
     );
     return next(error);
@@ -47,7 +47,7 @@ const signup = async (req, res, next) => {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
     const error = new HttpError(
-      'Could not create user, please try again.',
+      'Could not create user, please try again later.',
       500
     );
     return next(error);
@@ -87,7 +87,7 @@ const signup = async (req, res, next) => {
   }
 
   res.status(201).json({
-    message: 'Singin up successful, please login',
+    message: 'Singin up successful, please login.',
   });
 };
 
@@ -122,7 +122,7 @@ const login = async (req, res, next) => {
   }
 
   if (!isValidPassword) {
-    const error = new HttpError('Invalid username or password.', 403);
+    const error = new HttpError('Invalid username and/or password.', 403);
     return next(error);
   }
 
