@@ -14,7 +14,7 @@ const initial = require('./app/helpers/initial-role');
 const app = express();
 
 // Database connection - start here
-mongoose.connect(process.env.LOCAL_DATABASE_URL, {
+mongoose.connect(process.env.DATABASE_URL, {
   useCreateIndex: true,
   useFindAndModify: false,
   useNewUrlParser: true,
