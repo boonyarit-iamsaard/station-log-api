@@ -1,7 +1,8 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
 
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const HttpError = require('./app/models/http-error');
 
 const handlingRoutes = require('./app/routes/handling-route');
@@ -12,6 +13,10 @@ const PORT = process.env.PORT || 5000;
 const initial = require('./app/helpers/initial-role');
 
 const app = express();
+
+dotenv.config({
+  path: path.join(__dirname, `.env.${process.env.NODE_ENV}.local`),
+});
 
 // Database connection - start here
 mongoose.connect(process.env.DATABASE_URL, {
@@ -26,7 +31,7 @@ const db = mongoose.connection;
 db.on('error', error => console.log(error));
 
 db.once('open', () => {
-  console.log('Database is connected.');
+  console.log('Database is connected to ' + process.env.DATABASE_URL);
   initial();
 });
 // Database connection - end here
@@ -40,6 +45,7 @@ app.use((req, res, next) => {
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
   next();
 });
@@ -64,4 +70,6 @@ app.use((error, req, res, next) => {
     .json({ message: error.message || 'An unknown error occurred!' });
 });
 
-app.listen(PORT, () => console.log('Server is running....'));
+app.listen(PORT, () => {
+  console.log('Server is running on ' + process.env.NODE_ENV + ' mode.');
+});

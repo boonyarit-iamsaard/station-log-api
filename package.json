@@ -5,7 +5,8 @@
   "author": "Boonyarit Iamsa-ard",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "set NODE_ENV=production&& nodemon server.js",
+    "dev": "set NODE_ENV=development&& nodemon server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
