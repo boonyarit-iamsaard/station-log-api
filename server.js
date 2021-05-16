@@ -64,6 +64,7 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
+    console.log(res.headerSent);
     return next(error);
   }
 
