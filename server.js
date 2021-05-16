@@ -1,9 +1,10 @@
 const dotenv = require('dotenv');
 
+const HttpError = require('./app/models/http-error');
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const HttpError = require('./app/models/http-error');
 
 const handlingRoutes = require('./app/routes/handling-route');
 const sparesRoutes = require('./app/routes/spares-route');
@@ -38,17 +39,19 @@ db.once('open', () => {
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+//   );
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT,DELETE');
+//   res.setHeader('Access-Control-Allow-Credentials', true);
 
-  next();
-});
+//   next();
+// });
+
+app.use(cors());
 
 app.use('/api/handling', handlingRoutes);
 app.use('/api/spares', sparesRoutes);
