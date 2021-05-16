@@ -37,20 +37,21 @@ db.once('open', () => {
 
 app.use(express.json());
 
+app.use(cors());
+
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
 //   res.setHeader(
 //     'Access-Control-Allow-Headers',
 //     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 //   );
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT,DELETE');
-//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, PATCH, PUT, DELETE'
+//   );
 
 //   next();
 // });
-
-app.use(cors());
-app.options('*', cors());
 
 app.use('/api/handling', handlingRoutes);
 app.use('/api/spares', sparesRoutes);
@@ -64,13 +65,11 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
-    console.log(res.headerSent);
     return next(error);
   }
 
-  res
-    .status(error.code || 500)
-    .json({ message: error.message || 'An unknown error occurred!' });
+  res.status(error.code || 500);
+  res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
 app.listen(PORT, () => {
