@@ -19,7 +19,6 @@ dotenv.config({
   path: path.join(__dirname, `.env.${process.env.NODE_ENV}.local`),
 });
 
-// Database connection - start here
 mongoose.connect(process.env.DATABASE_URL, {
   useCreateIndex: true,
   useFindAndModify: false,
@@ -35,7 +34,6 @@ db.once('open', () => {
   console.log('Database is connected to ' + process.env.DATABASE_URL);
   initial();
 });
-// Database connection - end here
 
 app.use(express.json());
 
