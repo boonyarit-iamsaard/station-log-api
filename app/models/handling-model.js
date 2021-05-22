@@ -7,6 +7,7 @@ const taskSchema = new mongoose.Schema(
     },
     taskDetails: {
       type: String,
+      required: true,
     },
     hour: {
       eng: {
@@ -23,6 +24,29 @@ const taskSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+const serviceSchema = new mongoose.Schema({
+  service: {
+    type: String,
+  },
+  chargeType: {
+    type: String,
+  },
+  usage: {
+    type: Number,
+    default: 0,
+  },
+  hour: {
+    eng: {
+      type: Number,
+      default: 0,
+    },
+    mech: {
+      type: Number,
+      default: 0,
+    },
+  },
+});
 
 const handlingSchema = new mongoose.Schema(
   {
@@ -68,6 +92,18 @@ const handlingSchema = new mongoose.Schema(
     eic: {
       type: String,
       required: true,
+    },
+    remark: {
+      type: String,
+    },
+    services: [serviceSchema],
+    brakeCooling: {
+      type: Number,
+      default: 0,
+    },
+    hasBrakeCooling: {
+      type: Boolean,
+      default: false,
     },
   },
   {
