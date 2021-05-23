@@ -101,10 +101,6 @@ const handlingSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    hasBrakeCooling: {
-      type: Boolean,
-      default: false,
-    },
   },
   {
     timestamps: true,
