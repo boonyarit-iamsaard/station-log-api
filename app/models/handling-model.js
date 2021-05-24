@@ -98,8 +98,20 @@ const handlingSchema = new mongoose.Schema(
     },
     services: [serviceSchema],
     brakeCooling: {
-      type: Number,
-      default: 0,
+      fan: {
+        type: Number,
+        default: 0,
+      },
+      hour: {
+        eng: {
+          type: Number,
+          default: 0,
+        },
+        mech: {
+          type: Number,
+          default: 0,
+        },
+      },
     },
   },
   {
