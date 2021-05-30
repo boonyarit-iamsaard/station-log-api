@@ -25,28 +25,33 @@ const taskSchema = new mongoose.Schema(
   }
 );
 
-const serviceSchema = new mongoose.Schema({
-  service: {
-    type: String,
-  },
-  chargeType: {
-    type: String,
-  },
-  usage: {
-    type: Number,
-    default: 0,
-  },
-  hour: {
-    eng: {
+const serviceSchema = new mongoose.Schema(
+  {
+    service: {
+      type: String,
+    },
+    chargeType: {
+      type: String,
+    },
+    usage: {
       type: Number,
       default: 0,
     },
-    mech: {
-      type: Number,
-      default: 0,
+    hour: {
+      eng: {
+        type: Number,
+        default: 0,
+      },
+      mech: {
+        type: Number,
+        default: 0,
+      },
     },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const handlingSchema = new mongoose.Schema(
   {
