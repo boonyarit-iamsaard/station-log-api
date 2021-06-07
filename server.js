@@ -6,6 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
+const flightsRoutes = require('./app/routes/flight-route');
 const handlingRoutes = require('./app/routes/handling-route');
 const sparesRoutes = require('./app/routes/spares-route');
 const usersRoutes = require('./app/routes/user-route');
@@ -39,20 +40,7 @@ app.use(express.json());
 
 app.use(cors());
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-//   );
-//   res.setHeader(
-//     'Access-Control-Allow-Methods',
-//     'GET, POST, PATCH, PUT, DELETE'
-//   );
-
-//   next();
-// });
-
+app.use('/api/flights', flightsRoutes);
 app.use('/api/handling', handlingRoutes);
 app.use('/api/spares', sparesRoutes);
 app.use('/api/users', usersRoutes);

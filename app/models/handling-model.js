@@ -102,22 +102,6 @@ const handlingSchema = new mongoose.Schema(
       type: String,
     },
     services: [serviceSchema],
-    brakeCooling: {
-      fan: {
-        type: Number,
-        default: 0,
-      },
-      hour: {
-        eng: {
-          type: Number,
-          default: 0,
-        },
-        mech: {
-          type: Number,
-          default: 0,
-        },
-      },
-    },
   },
   {
     timestamps: true,

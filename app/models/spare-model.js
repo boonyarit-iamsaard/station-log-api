@@ -12,6 +12,9 @@ const actionSchema = mongoose.Schema(
     by: {
       type: String,
     },
+    date: {
+      type: String,
+    },
   },
   {
     timestamps: true,
