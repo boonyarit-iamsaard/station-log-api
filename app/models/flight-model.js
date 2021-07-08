@@ -70,6 +70,9 @@ const assignedDelaySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  remark: {
+    type: String,
+  },
 });
 
 const flightSchema = new mongoose.Schema(
@@ -88,7 +91,6 @@ const flightSchema = new mongoose.Schema(
     },
     prefix: {
       type: String,
-      required: true,
     },
     tail: {
       type: String,
