@@ -69,8 +69,6 @@ const updateSpare = async (req, res, next) => {
   const id = req.params.id;
   const spareData = req.body;
 
-  console.log(spareData);
-
   let spare;
   try {
     spare = await Spare.findById(id);
