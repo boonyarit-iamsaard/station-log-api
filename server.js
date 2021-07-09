@@ -6,6 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
+const disinfectionRoutes = require('./app/routes/disinfection-route');
 const flightsRoutes = require('./app/routes/flight-route');
 const handlingRoutes = require('./app/routes/handling-route');
 const sparesRoutes = require('./app/routes/spares-route');
@@ -40,6 +41,7 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use('/api/disinfection', disinfectionRoutes);
 app.use('/api/flights', flightsRoutes);
 app.use('/api/handling', handlingRoutes);
 app.use('/api/spares', sparesRoutes);
