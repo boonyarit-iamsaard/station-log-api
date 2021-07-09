@@ -1,25 +1,20 @@
 const mongoose = require('mongoose');
 
-const actionSchema = mongoose.Schema(
-  {
-    status: {
-      type: Boolean,
-      default: false,
-    },
-    number: {
-      type: String,
-    },
-    by: {
-      type: String,
-    },
-    date: {
-      type: String,
-    },
+const actionSchema = mongoose.Schema({
+  status: {
+    type: Boolean,
+    default: false,
   },
-  {
-    timestamps: true,
-  }
-);
+  number: {
+    type: String,
+  },
+  by: {
+    type: String,
+  },
+  date: {
+    type: String,
+  },
+});
 
 const spareSchema = mongoose.Schema(
   {

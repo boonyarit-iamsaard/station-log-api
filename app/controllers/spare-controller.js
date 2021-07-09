@@ -66,32 +66,45 @@ const createSpare = async (req, res, next) => {
 };
 
 const updateSpare = async (req, res, next) => {
-  const spareID = req.params.id;
+  const id = req.params.id;
   const spareData = req.body;
+
+  console.log(spareData);
 
   let spare;
   try {
-    spare = await Spare.findByIdAndUpdate(spareID, spareData, {
-      new: true,
-      useFindAndModify: false,
-    });
+    spare = await Spare.findById(id);
 
     if (!spare) {
-      const error = new HttpError(
-        'Could not find spare for the provided id.',
-        404
-      );
+      const error = new HttpError('Could not find spare for this id.', 404);
+
       return next(error);
     }
-
-    res.json({ spare: spare });
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not find a spare.',
       500
     );
+
     return next(error);
   }
+
+  Object.keys(spareData).forEach(key => {
+    spare[key] = spareData[key];
+  });
+
+  try {
+    await spare.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not update spare.',
+      500
+    );
+
+    return next(error);
+  }
+
+  res.status(200).json({ spare: spare });
 };
 
 const deleteSpare = async (req, res, next) => {
