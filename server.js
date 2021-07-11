@@ -9,6 +9,7 @@ const path = require('path');
 const disinfectionRoutes = require('./app/routes/disinfection-route');
 const flightsRoutes = require('./app/routes/flight-route');
 const handlingRoutes = require('./app/routes/handling-route');
+const manpowerRoutes = require('./app/routes/manpower-route');
 const sparesRoutes = require('./app/routes/spares-route');
 const usersRoutes = require('./app/routes/user-route');
 
@@ -44,6 +45,7 @@ app.use(cors());
 app.use('/api/disinfection', disinfectionRoutes);
 app.use('/api/flights', flightsRoutes);
 app.use('/api/handling', handlingRoutes);
+app.use('/api/manpower', manpowerRoutes);
 app.use('/api/spares', sparesRoutes);
 app.use('/api/users', usersRoutes);
 
