@@ -116,6 +116,9 @@ const flightSchema = new mongoose.Schema(
     check2: {
       type: String,
     },
+    check3: {
+      type: String,
+    },
     afac: {
       type: Number,
       default: 0,
