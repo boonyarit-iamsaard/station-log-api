@@ -2,7 +2,9 @@ const HttpError = require('../models/http-error');
 const Spare = require('../models/spare-model');
 
 const getSpares = async (req, res, next) => {
+  let partCount;
   let spares;
+
   try {
     spares = await Spare.find();
   } catch (err) {
@@ -13,7 +15,30 @@ const getSpares = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ spares: spares });
+  try {
+    partCount = await Spare.aggregate()
+      .group({
+        _id: '$part',
+        count: {
+          $sum: 1,
+        },
+      })
+      .sort({
+        count: -1,
+      })
+      .limit(10);
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching spares failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+  res.json({
+    partCount,
+    spares,
+  });
 };
 
 const getSpareByID = async (req, res, next) => {
