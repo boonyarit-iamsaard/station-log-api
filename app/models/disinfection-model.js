@@ -39,11 +39,9 @@ const disinfectionSchema = new mongoose.Schema(
     },
     startAt: {
       type: String,
-      required: true,
     },
     endAt: {
       type: String,
-      required: true,
     },
     chemicalUsage: {
       type: Number,
