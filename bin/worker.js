@@ -1,3 +1,4 @@
+#! /app/.heroku/node/bin/node
 function currentDate() {
   return new Date();
 }
@@ -7,3 +8,5 @@ function scheduler() {
 }
 
 scheduler();
+
+process.exit();
