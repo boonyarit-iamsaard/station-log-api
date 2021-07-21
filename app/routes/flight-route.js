@@ -3,11 +3,11 @@
 const express = require('express');
 const router = express.Router();
 
-const checkAuth = require('../middlewares/check-auth');
+// const checkAuth = require('../middlewares/check-auth');
 
 const flightController = require('../controllers/flight-controller');
 
-router.use(checkAuth);
+// router.use(checkAuth);
 
 router.get('/', flightController.getFlights);
 
