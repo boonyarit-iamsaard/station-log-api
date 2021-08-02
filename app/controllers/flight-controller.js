@@ -3,46 +3,6 @@ const HttpError = require('../models/http-error');
 
 const getFlights = async (req, res, next) => {
   try {
-    const flightsSummary = await Flight.aggregate([
-      {
-        $match: {
-          ata: {
-            $ne: '',
-          },
-        },
-      },
-      {
-        $group: {
-          _id: {
-            year: {
-              $year: {
-                $dateFromString: {
-                  dateString: '$date',
-                },
-              },
-            },
-            month: {
-              $month: {
-                $dateFromString: {
-                  dateString: '$date',
-                },
-              },
-            },
-            airline: '$airline',
-          },
-          count: {
-            $sum: 1,
-          },
-        },
-      },
-    ]);
-
-    console.log(flightsSummary);
-  } catch (error) {
-    console.log(error);
-  }
-
-  try {
     const flights = await Flight.find();
 
     res.json({ flights: flights });
