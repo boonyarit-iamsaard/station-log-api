@@ -153,6 +153,9 @@ const flightSchema = new mongoose.Schema(
     remark: {
       type: String,
     },
+    acknowledgedBy: {
+      type: String,
+    },
   },
   {
     timestamps: true,
