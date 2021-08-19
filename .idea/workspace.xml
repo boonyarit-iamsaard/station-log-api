@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="de4b03a2-9656-49ae-9038-e03896742bf6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-    </list>
+    <list default="true" id="de4b03a2-9656-49ae-9038-e03896742bf6" name="Changes" comment="feat(handover): wip add handover model" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,12 +62,27 @@
       <workItem from="1629353122191" duration="20000" />
       <workItem from="1629353158956" duration="775000" />
       <workItem from="1629353965813" duration="1378000" />
-      <workItem from="1629372979255" duration="2908000" />
+      <workItem from="1629372979255" duration="3225000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(handover): wip add handover model" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(handover): wip add handover model" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
