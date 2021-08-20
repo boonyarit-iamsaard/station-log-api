@@ -1,14 +1,14 @@
-const AogHandover = require('../models/aog-handover.model');
+const StationHandover = require('../models/station-handover.model');
 const HttpError = require('../models/http-error');
 
 const findAll = async (req, res, next) => {
   try {
-    const records = await AogHandover.find();
+    const records = await StationHandover.find();
 
     res.json({ records });
   } catch (err) {
     const error = new HttpError(
-      'Fetching AOG handover records failed, please try again later.',
+      'Fetching station handover records failed, please try again later.',
       500
     );
 
@@ -20,11 +20,11 @@ const findOne = async (req, res, next) => {
   const id = req.params.id;
 
   try {
-    const record = await AogHandover.findById(id);
+    const record = await StationHandover.findById(id);
 
     if (!record) {
       const error = new HttpError(
-        'Could not find an AOG handover record for the provided id.',
+        'Could not find a station handover record for the provided id.',
         404
       );
       return next(error);
@@ -33,7 +33,7 @@ const findOne = async (req, res, next) => {
     res.json({ record });
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not find an AOG handover record.',
+      'Something went wrong, could not find a station handover record.',
       500
     );
 
@@ -42,14 +42,14 @@ const findOne = async (req, res, next) => {
 };
 
 const create = async (req, res, next) => {
-  const recordData = new AogHandover(req.body);
+  const recordData = new StationHandover(req.body);
 
   try {
     const record = await recordData.save();
 
     if (!record) {
       const error = new HttpError(
-        'Could not create an AOG handover record.',
+        'Could not create a station handover record.',
         404
       );
 
@@ -59,7 +59,7 @@ const create = async (req, res, next) => {
     res.status(201).json({ record });
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not create an AOG handover record.',
+      'Something went wrong, could not create a station handover record.',
       500
     );
 
@@ -73,11 +73,11 @@ const update = async (req, res, next) => {
 
   let record;
   try {
-    record = await AogHandover.findById(id);
+    record = await StationHandover.findById(id);
 
     if (!record) {
       const error = new HttpError(
-        'Could not find an AOG handover record for this id.',
+        'Could not find an station handover record for this id.',
         404
       );
 
@@ -85,7 +85,7 @@ const update = async (req, res, next) => {
     }
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not find an AOG handover record.',
+      'Something went wrong, could not find an station handover record.',
       500
     );
 
@@ -100,7 +100,7 @@ const update = async (req, res, next) => {
     await record.save();
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not update an AOG handover record.',
+      'Something went wrong, could not update a station handover record.',
       500
     );
 
@@ -115,11 +115,11 @@ const deleteOne = async (req, res, next) => {
 
   let record;
   try {
-    record = await AogHandover.findById(id);
+    record = await StationHandover.findById(id);
 
     if (!record) {
       const error = new HttpError(
-        'Could not find an AOG handover record for this id.',
+        'Could not find an station handover record for this id.',
         404
       );
 
@@ -127,7 +127,7 @@ const deleteOne = async (req, res, next) => {
     }
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not find an AOG handover record.',
+      'Something went wrong, could not find a station handover record.',
       500
     );
 
@@ -138,7 +138,7 @@ const deleteOne = async (req, res, next) => {
     await record.remove();
   } catch (err) {
     const error = new HttpError(
-      'Something went wrong, could not delete an AOG handover record.',
+      'Something went wrong, could not delete a station handover record.',
       500
     );
     return next(error);
@@ -146,7 +146,7 @@ const deleteOne = async (req, res, next) => {
 
   res
     .status(200)
-    .json({ message: 'An AOG handover record deleted successfully.' });
+    .json({ message: 'A station handover record deleted successfully.' });
 };
 
 exports.create = create;
