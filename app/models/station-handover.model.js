@@ -16,6 +16,10 @@ const stationHandoverSchema = new mongoose.Schema(
     acknowledgedBy: {
       type: String,
     },
+    isAcknowledged: {
+      type: Boolean,
+      default: false,
+    },
     details: {
       type: String,
       required: true,
