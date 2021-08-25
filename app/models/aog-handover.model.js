@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
-const handoverDetail = new mongoose.Schema({
-  date: {
+const handoverDetails = new mongoose.Schema({
+  recordDate: {
+    type: String,
+    required: true,
+  },
+  recordBy: {
     type: String,
     required: true,
   },
@@ -9,15 +13,21 @@ const handoverDetail = new mongoose.Schema({
     type: String,
     required: true,
   },
-  engineer: {
+  isAcknowledged: {
+    type: Boolean,
+    default: false,
+  },
+  acknowledgedBy: {
     type: String,
-    required: true,
+  },
+  acknowledgedDate: {
+    type: String,
   },
 });
 
 const aogHandoverSchema = new mongoose.Schema(
   {
-    date: {
+    fltDate: {
       type: String,
       required: true,
     },
@@ -40,7 +50,7 @@ const aogHandoverSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    details: [handoverDetail],
+    details: [handoverDetails],
   },
   {
     timestamps: true,

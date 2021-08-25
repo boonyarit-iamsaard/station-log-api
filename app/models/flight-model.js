@@ -153,7 +153,14 @@ const flightSchema = new mongoose.Schema(
     remark: {
       type: String,
     },
+    isAcknowledged: {
+      type: Boolean,
+      default: false,
+    },
     acknowledgedBy: {
+      type: String,
+    },
+    acknowledgedDate: {
       type: String,
     },
   },
