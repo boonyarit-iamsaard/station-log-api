@@ -157,6 +157,14 @@ const flightSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    hasCabinDefect: {
+      type: Boolean,
+      default: false,
+    },
+    hasTechnicalDefect: {
+      type: Boolean,
+      default: false,
+    },
     acknowledgedBy: {
       type: String,
     },
