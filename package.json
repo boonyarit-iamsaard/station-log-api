@@ -18,7 +18,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prepare": "husky install",
+    "check:types": "tsc --pretty --noEmit",
+    "check:format": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
+    "check:lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "check:all": "npm run check:format && npm run check:lint && npm run check:types && npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -49,7 +54,8 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "husky": "^7.0.0"
   },
   "jest": {
     "moduleFileExtensions": [
