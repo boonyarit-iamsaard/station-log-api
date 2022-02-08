@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
+import { DatabaseModule } from '../database/database.module';
+import { HealthModule } from '../health/health.module';
 
 @Module({
   imports: [
@@ -9,6 +11,8 @@ import * as Joi from 'joi';
         PORT: Joi.number().default(3000),
       }),
     }),
+    DatabaseModule,
+    HealthModule,
   ],
 })
 export class AppModule {}
