@@ -7,7 +7,9 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { CookieAuthGuard } from '../../auth/guards/cookie-auth.guard';
 import { FindOneParams } from '../../common/utils/find-one-params';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -15,55 +17,52 @@ import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 
 @Controller('users')
+@UseGuards(CookieAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
   async find() {
-    const users = (await this.usersService.find()).map(
-      (user) => new User(user),
-    );
+    const users = await this.usersService.find();
 
     if (!users.length) throw new NotFoundException('Users not found');
 
-    return users;
+    return users.map((user) => new User(user));
   }
 
   @Get(':id')
   async findOne(@Param() { id }: FindOneParams) {
-    const existingUser = new User(
-      await this.usersService.findOne({ where: { id } }),
-    );
+    const existingUser = await this.usersService.findOne({ where: { id } });
 
     if (!existingUser) throw new NotFoundException('User not found');
 
-    return existingUser;
+    return new User(existingUser);
   }
 
   @Post()
   async create(@Body() user: CreateUserDto) {
-    const createdUser = new User(await this.usersService.create(user));
+    const createdUser = await this.usersService.create(user);
 
     if (!createdUser) throw new NotFoundException('User not found');
 
-    return createdUser;
+    return new User(createdUser);
   }
 
   @Put(':id')
   async update(@Param() { id }: FindOneParams, @Body() user: UpdateUserDto) {
-    const updatedUser = new User(await this.usersService.update(id, user));
+    const updatedUser = await this.usersService.update(id, user);
 
     if (!updatedUser) throw new NotFoundException('User not found');
 
-    return updatedUser;
+    return new User(updatedUser);
   }
 
   @Delete(':id')
   async delete(@Param() { id }: FindOneParams) {
-    const deletedUser = new User(await this.usersService.delete(id));
+    const deletedUser = await this.usersService.delete(id);
 
     if (!deletedUser) throw new NotFoundException('User not found');
 
-    return deletedUser;
+    return new User(deletedUser);
   }
 }

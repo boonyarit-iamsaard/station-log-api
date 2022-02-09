@@ -12,6 +12,9 @@ import * as Joi from 'joi';
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         PORT: Joi.number().default(3000),
+        REDIS_TLS_URL: Joi.string().required(),
+        REDIS_URL: Joi.string().required(),
+        SESSION_SECRET: Joi.string().required(),
       }),
     }),
     DatabaseModule,

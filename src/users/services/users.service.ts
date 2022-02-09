@@ -31,7 +31,7 @@ export class UsersService {
   async update(id: string, user: UpdateUserDto): Promise<User> {
     const existingUser = await this.userRepository.findOne(id);
 
-    if (!existingUser) return null;
+    if (!existingUser) return;
 
     const updatedUser = this.userRepository.merge(existingUser, user);
 
@@ -41,7 +41,7 @@ export class UsersService {
   async delete(id: string): Promise<User> {
     const existingUser = await this.userRepository.findOne(id);
 
-    if (!existingUser) return null;
+    if (!existingUser) return;
 
     return await this.userRepository.remove(existingUser);
   }
