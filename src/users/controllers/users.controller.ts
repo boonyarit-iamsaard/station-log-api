@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -19,26 +20,50 @@ export class UsersController {
 
   @Get()
   async find() {
-    return (await this.usersService.find()).map((user) => new User(user));
+    const users = (await this.usersService.find()).map(
+      (user) => new User(user),
+    );
+
+    if (!users.length) throw new NotFoundException('Users not found');
+
+    return users;
   }
 
   @Get(':id')
   async findOne(@Param() { id }: FindOneParams) {
-    return new User(await this.usersService.findOne({ where: { id } }));
+    const existingUser = new User(
+      await this.usersService.findOne({ where: { id } }),
+    );
+
+    if (!existingUser) throw new NotFoundException('User not found');
+
+    return existingUser;
   }
 
   @Post()
   async create(@Body() user: CreateUserDto) {
-    return new User(await this.usersService.create(user));
+    const createdUser = new User(await this.usersService.create(user));
+
+    if (!createdUser) throw new NotFoundException('User not found');
+
+    return createdUser;
   }
 
   @Put(':id')
   async update(@Param() { id }: FindOneParams, @Body() user: UpdateUserDto) {
-    return new User(await this.usersService.update(id, user));
+    const updatedUser = new User(await this.usersService.update(id, user));
+
+    if (!updatedUser) throw new NotFoundException('User not found');
+
+    return updatedUser;
   }
 
   @Delete(':id')
   async delete(@Param() { id }: FindOneParams) {
-    return new User(await this.usersService.delete(id));
+    const deletedUser = new User(await this.usersService.delete(id));
+
+    if (!deletedUser) throw new NotFoundException('User not found');
+
+    return deletedUser;
   }
 }
