@@ -3,6 +3,7 @@ import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { QueryErrorExceptionFilter } from './src/common/filters/query-error-exception.filter';
 import { createClient } from 'redis';
+import * as cookieParser from 'cookie-parser';
 import * as createRedisStore from 'connect-redis';
 import * as passport from 'passport';
 import * as session from 'express-session';
@@ -11,6 +12,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT;
   const { httpAdapter } = app.get(HttpAdapterHost);
+
+  app.enableCors({
+    origin: 'http://localhost:3000', // must be specified
+    credentials: true, // enable set cookie
+  });
+  app.use(cookieParser());
 
   app.setGlobalPrefix('api');
   app.useGlobalFilters(new QueryErrorExceptionFilter(httpAdapter));
