@@ -1,7 +1,7 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import { QueryErrorExceptionFilter } from './src/common/filters/query-error-exception.filter';
+import { QueryErrorExceptionFilter } from './common/filters/query-error-exception.filter';
 import { createClient } from 'redis';
 import * as cookieParser from 'cookie-parser';
 import * as createRedisStore from 'connect-redis';
