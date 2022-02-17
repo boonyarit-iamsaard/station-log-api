@@ -24,21 +24,20 @@ dotenv.config({
   path: path.join(__dirname, `.env.${process.env.NODE_ENV}.local`),
 });
 
-mongoose.connect(process.env.DATABASE_URL, {
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+async function main() {
+  await mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+}
 
-const db = mongoose.connection;
+main()
+  .then(() => {
+    console.log('Database is connected to ' + process.env.DATABASE_URL);
 
-db.on('error', error => console.log(error));
-
-db.once('open', () => {
-  console.log('Database is connected to ' + process.env.DATABASE_URL);
-  initial();
-});
+    initial();
+  })
+  .catch(err => console.log(err));
 
 app.use(express.json());
 
