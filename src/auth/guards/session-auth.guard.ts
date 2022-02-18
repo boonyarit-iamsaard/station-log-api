@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 
 @Injectable()
-export class CookieAuthGuard implements CanActivate {
+export class SessionAuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
     return request.isAuthenticated();

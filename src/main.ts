@@ -1,45 +1,43 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory, Reflector } from '@nestjs/core';
+import { TypeormStore } from 'connect-typeorm';
+import { getConnection } from 'typeorm';
+
 import { AppModule } from './app/app.module';
 import { QueryErrorExceptionFilter } from './common/filters/query-error-exception.filter';
-import { createClient } from 'redis';
+import { SessionEntity } from './users/entities/session.entity';
+
 import * as cookieParser from 'cookie-parser';
-import * as createRedisStore from 'connect-redis';
 import * as passport from 'passport';
 import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT;
+  const sessionRepository = getConnection().getRepository(SessionEntity);
   const { httpAdapter } = app.get(HttpAdapterHost);
 
   app.enableCors({
     origin: 'http://localhost:3000', // must be specified
     credentials: true, // enable set cookie
   });
-  app.use(cookieParser());
-
   app.setGlobalPrefix('api');
   app.useGlobalFilters(new QueryErrorExceptionFilter(httpAdapter));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalPipes(new ValidationPipe());
 
-  // TODO: research more about redis package, types and how to setup
-  const RedisStore = createRedisStore(session);
-  const redisClient = createClient({ url: process.env.REDIS_URL });
-
+  app.use(cookieParser());
   app.use(
     session({
       cookie: {
-        maxAge: 1000 * 60 * 60 * 12, // maxAge in milliseconds (12 hours)
+        maxAge: 1000 * 60 * 60, // 1 hour
       },
-      store: new RedisStore({ client: redisClient }),
+      store: new TypeormStore().connect(sessionRepository),
       secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
     }),
   );
-
   app.use(passport.initialize());
   app.use(passport.session());
 

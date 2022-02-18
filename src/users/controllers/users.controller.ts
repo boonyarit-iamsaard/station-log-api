@@ -9,7 +9,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { CookieAuthGuard } from '../../auth/guards/cookie-auth.guard';
+import { SessionAuthGuard } from '../../auth/guards/session-auth.guard';
 import { FindOneParams } from '../../common/utils/find-one-params';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -17,7 +17,7 @@ import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 
 @Controller('users')
-@UseGuards(CookieAuthGuard)
+@UseGuards(SessionAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
