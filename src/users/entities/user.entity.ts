@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Role } from '../../common/types/role.enum';
 
-@Entity()
+@Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
