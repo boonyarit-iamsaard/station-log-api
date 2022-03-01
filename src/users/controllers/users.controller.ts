@@ -9,15 +9,16 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { SessionAuthGuard } from '../../auth/guards/session-auth.guard';
-import { FindOneParams } from '../../common/utils/find-one-params';
+
 import { CreateUserDto } from '../dto/create-user.dto';
+import { FindOneParams } from '../../common/utils/find-one-params';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 
 @Controller('users')
-@UseGuards(SessionAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
