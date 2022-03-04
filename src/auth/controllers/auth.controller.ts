@@ -1,11 +1,11 @@
+import { ConfigService } from '@nestjs/config';
 import { Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 
 import { AuthService } from '../services/auth.service';
 import { AuthenticatedRequest } from '../../common/types/authenticated-request.interface';
-import { LocalAuthGuard } from '../guards/local-auth.guard';
-import { ConfigService } from '@nestjs/config';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -19,7 +19,7 @@ export class AuthController {
   async login(@Req() request: AuthenticatedRequest, @Res() response: Response) {
     const jwt = this.authService.login(request.user);
     const secure = process.env.NODE_ENV === 'production';
-    const { name, email, roles } = request.user;
+    const { id, name, email, roles } = request.user;
 
     response
       .cookie('jwt', jwt, {
@@ -29,11 +29,10 @@ export class AuthController {
         path: '/',
       })
       .json({
-        user: {
-          name,
-          email,
-          roles,
-        },
+        id,
+        name,
+        email,
+        roles,
       });
   }
 
