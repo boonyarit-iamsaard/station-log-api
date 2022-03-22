@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 
 import { AuthModule } from '../auth/auth.module';
 import { DatabaseModule } from '../database/database.module';
+import { EmailModule } from '../email/email.module';
 import { HealthModule } from '../health/health.module';
 import { UsersModule } from '../users/users.module';
 
@@ -15,10 +16,17 @@ import { UsersModule } from '../users/users.module';
         DATABASE_URL: Joi.string().required(),
         JWT_EXPIRES_IN: Joi.number().required(),
         JWT_SECRET: Joi.string().required(),
+        ORIGIN_URL: Joi.string().required(),
         PORT: Joi.number().default(3000),
+        SMTP_HOST: Joi.string().required(),
+        SMTP_PASS: Joi.string().required(),
+        SMTP_PORT: Joi.number().default(587),
+        SMTP_SECURE: Joi.boolean().default(false),
+        SMTP_USER: Joi.string().required(),
       }),
     }),
     DatabaseModule,
+    EmailModule,
     HealthModule,
     UsersModule,
   ],
