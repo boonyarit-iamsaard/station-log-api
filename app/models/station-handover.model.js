@@ -20,6 +20,12 @@ const stationHandoverSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    radioCheck: {
+      type: Boolean,
+    },
+    batteryCheck: {
+      type: Boolean,
+    },
     details: {
       type: String,
       required: true,
